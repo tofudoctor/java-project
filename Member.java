@@ -1,7 +1,12 @@
 import java.util.*;
-public class Member extends User{
+import javax.swing.*;
+public abstract class Member extends User{
     protected ArrayList<Book> books = new ArrayList<Book>();
-    public Member(String name, String password){
-        super(name, password);
+    
+    //constructor
+    public Member(String name, String password, String email){
+        super(name, password, email);
     }
+    //functional methods
+    
 }

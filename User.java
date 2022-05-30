@@ -1,11 +1,15 @@
 import javax.swing.*;
-public class User {
+public abstract class User {
     protected String name;
+    protected String email;
     protected String password;
-    public User(String name, String password){
+    //constructor
+    public User(String name, String password, String email){
         setName(name);
         setPassword(password);
+        setEmail(email);
     }
+    //service methods
     public String getName() {
         return name;
     }
@@ -16,12 +20,19 @@ public class User {
         return password;
     }
     public void setPassword(String password) {
-        if(password.length() <= 8){
-            JOptionPane.showMessageDialog(null, "請輸入超過八個字元!!!");
+        if(password.length() <= 3){
+            JOptionPane.showMessageDialog(null, "請輸入超過3個字元!!!");
         }
         else{
             this.password = password;
         }
     }
-     
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    //functional methods
+    public abstract boolean gui(); 
 }
