@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.*;
 public class Teacher extends Member{
     private int count;
     //constructor
@@ -17,19 +18,31 @@ public class Teacher extends Member{
     public void borrow_book(){
         String isbn = JOptionPane.showInputDialog(null, "請輸入要借的書籍的isbn:");
         if(this.count<=20){
+            Calendar now =  Calendar.getInstance();
             books.add(Main.books.get(isbn));
             this.count++;
-            JOptionPane.showMessageDialog(null, "借書成功");
+            Main.books.get(isbn).setLend(true);
+            Main.books.get(isbn).setLend_date(now);
+            now.add(Calendar.DATE,5);
+            Main.books.get(isbn).setReturn_date(now);
+            JOptionPane.showMessageDialog(null, "借書成功\n還書日期為: "+now.get(Calendar.DATE)+"後");
         }
         else{
             JOptionPane.showMessageDialog(null, "最多借10本!!!");
         }
     }
     public void return_book(){
+        Calendar now =  Calendar.getInstance();
         String isbn = JOptionPane.showInputDialog(null, "請輸入要還的書籍的isbn:");
         books.remove(Main.books.get(isbn));
         this.count--;
+        if(Main.books.get(isbn).day_difference(now, Main.books.get(isbn).getReturn_date()) > 5){// overdue
+            JOptionPane.showMessageDialog(null, "逾期!\n請繳罰金!");
+        }
         JOptionPane.showMessageDialog(null, "還書成功");
+        Main.books.get(isbn).setLend(false);
+        Main.books.get(isbn).setLend_date(null);
+        Main.books.get(isbn).setReturn_date(null);
     }
     public String toString(){
         String s="你好，";

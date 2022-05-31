@@ -1,8 +1,11 @@
+import java.util.*;
 public class Book {
     private String isbn;
     private String name;
     private String author;
     private String publisher;
+    private Calendar lend_date;
+    private Calendar return_date;
     private boolean lend;
 
     //constructor
@@ -44,7 +47,43 @@ public class Book {
     public void setLend(boolean lend) {
         this.lend = lend;
     }
+    public Calendar getLend_date() {
+        return lend_date;
+    }
+    public void setLend_date(Calendar lend_date) {
+        this.lend_date = lend_date;
+    }
+    public Calendar getReturn_date() {
+        return return_date;
+    }
+    public void setReturn_date(Calendar return_date) {
+        this.return_date = return_date;
+    }
     //functional methods
+    public int day_difference(Calendar c1, Calendar c2){
+        int day1= c1.get(Calendar.DAY_OF_YEAR);
+        int day2 = c2.get(Calendar.DAY_OF_YEAR);
+        int year1 = c1.get(Calendar.YEAR);
+        int year2 = c2.get(Calendar.YEAR);
+        if(year1 == year2){
+            return day2-day1;
+        }
+        else{
+            int lap = 0;
+            for(int i = year1 ; i < year2 ; i++)
+            {
+                if((i%4==0 && i%100!=0) || i%400==0) //leap year
+                {
+                    lap  += 366;
+                }
+                else //not leap year
+                {
+                    lap  += 365;
+                }
+            }
+            return lap+day2-day1;
+        }
+    }
     public String toString(){
         String s="®Ñ¦W: ";
         s += getName();
