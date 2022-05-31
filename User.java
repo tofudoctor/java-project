@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.*;
 public abstract class User {
     protected String name;
     protected String email;
@@ -34,5 +35,5 @@ public abstract class User {
         this.email = email;
     }
     //functional methods
-    public abstract boolean gui(); 
+    public abstract boolean gui()throws IOException; 
 }

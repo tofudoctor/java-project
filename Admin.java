@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.*;
 public class Admin extends User{
     
     //constructor
@@ -6,12 +7,15 @@ public class Admin extends User{
         super(name, password, email);
     }
     //functional methods
-    public void add_book(){
+    public void add_book()throws IOException{
         String isbn = JOptionPane.showInputDialog(null, "請輸入isbn:");
         String name = JOptionPane.showInputDialog(null, "請輸入書名:");
         String author = JOptionPane.showInputDialog(null, "請輸入作者:");
         String publisher = JOptionPane.showInputDialog(null, "請輸入出版社:");
         Main.books.put(isbn, new Book(isbn, name, author, publisher));
+        FileWriter filewriter = new FileWriter("books.txt", true);
+        filewriter.write(isbn+" "+name+" "+author+" "+publisher+"\r\n");
+        filewriter.close();
     }
     public void delete_book(){
         String isbn = JOptionPane.showInputDialog(null, "請輸入要刪除書籍的isbn:");
@@ -20,6 +24,7 @@ public class Admin extends User{
         }
         else{
             Main.books.remove(isbn);
+            
         }
     }
     public void modify(){
@@ -37,7 +42,7 @@ public class Admin extends User{
         s += " 管理員\n";
         return s;
     }
-    public boolean gui(){
+    public boolean gui()throws IOException{
         String operation[] = {"新增", "刪除", "搜尋", "離開"}; 
         int operation_option = JOptionPane.showOptionDialog(null, this.toString()+"請選擇功能", null, 1, 1, null, operation, null);
         if(operation_option == 0){

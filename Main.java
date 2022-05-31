@@ -1,8 +1,18 @@
 import java.util.*;
+import java.io.*;
 import javax.swing.*;
 public class Main{
     static HashMap<String, User> users = new HashMap<String, User>();
     static HashMap<String, Book> books = new HashMap<String, Book>();
+    public static void init()throws IOException{
+        File doc = new File("books.txt");
+        Scanner scanner = new Scanner(doc);
+        while (scanner.hasNextLine()){
+            String tmp = scanner.nextLine();
+            String tmps[] = tmp.split(" ");
+            books.put(tmps[0], new Book(tmps[0], tmps[1], tmps[2], tmps[3]));
+        }
+    }
     public static Book search(){
         String isbn = JOptionPane.showInputDialog(null, "請輸入要搜尋的書籍的isbn:");
         Book b = books.get(isbn);
@@ -43,7 +53,8 @@ public class Main{
             users.put(new_email, new Staff(new_name, new_password, new_email));
         }
     }
-    public static void main(String[] args){
+    public static void main(String[] args)throws IOException{
+        init();
         while(true){
             String email = JOptionPane.showInputDialog(null, "請輸入您的E-mail:");
             if(email == null){

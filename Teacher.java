@@ -25,7 +25,7 @@ public class Teacher extends Member{
             Main.books.get(isbn).setLend_date(now);
             now.add(Calendar.DATE,5);
             Main.books.get(isbn).setReturn_date(now);
-            JOptionPane.showMessageDialog(null, "借書成功\n還書日期為: "+now.get(Calendar.DATE)+"後");
+            JOptionPane.showMessageDialog(null, "借書成功\n還書日期為: "+now.get(Calendar.DATE)+"天後");
         }
         else{
             JOptionPane.showMessageDialog(null, "最多借10本!!!");
