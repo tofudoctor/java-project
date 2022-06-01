@@ -16,7 +16,7 @@ public class Book {
         setAuthor(author);
         setPublisher(publisher);
         setLend(false);
-	  setPage(page);
+	setPage(page);
     }
 
 
@@ -114,22 +114,22 @@ public class Book {
 
     //Output
     public String toString(){
-        String s="®Ñ¦W: ";
+        String s="æ›¸å: ";
         s += getName();
-        s += "\n§@ªÌ: ";
+        s += "\nä½œè€…: ";
         s += getAuthor();
         s += "\nIsbn: ";
         s += getIsbn();
-        s += "\n¥Xª©°Ó: ";
+        s += "\nå‡ºç‰ˆå•†: ";
         s += getPublisher();
-	  s += "\n­¶¼Æ: "
+	  s += "\né æ•¸: "
         s += getPage();
-        s += "\n¯²­Éª¬ºA: ";
+        s += "\nç§Ÿå€Ÿç‹€æ…‹: ";
         if(getLend()){
-            s += "¤w­É¥X";
+            s += "å·²å€Ÿå‡º";
         }
         else{
-            s += "¥¼­É¥X";
+            s += "æœªå€Ÿå‡º";
         }
         s += "\n";
         return s;
