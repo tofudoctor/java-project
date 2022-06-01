@@ -4,6 +4,7 @@ public abstract class User {
     protected String name;
     protected String email;
     protected String password;
+    protected String iden;
     //constructor
     public User(String name, String password, String email){
         setName(name);
@@ -33,6 +34,12 @@ public abstract class User {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    public String getIden() {
+        return iden;
+    }
+    public void setIden(String iden) {
+        this.iden = iden;
     }
     //functional methods
     public abstract boolean gui()throws IOException; 

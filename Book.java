@@ -114,24 +114,24 @@ public class Book {
 
     //Output
     public String toString(){
-        String s="æ›¸å: ";
+        String s="®Ñ¦W: ";
         s += getName();
-        s += "\nä½œè€…: ";
+        s += "\n§@ªÌ: ";
         s += getAuthor();
         s += "\nIsbn: ";
         s += getIsbn();
-        s += "\nå‡ºç‰ˆå•†: ";
+        s += "\n¥Xª©°Ó: ";
         s += getPublisher();
-	s += "\né æ•¸: "
+	    s += "\n­¶¼Æ: ";
         s += getPage();
-        s += "\nç§Ÿå€Ÿç‹€æ…‹: ";
+        s += "\n¯²­Éª¬ºA: ";
         if(getLend()){
-            s += "å·²å€Ÿå‡º";
+            s += "¤w­É¥X";
         }
         else{
-            s += "æœªå€Ÿå‡º";
+            s += "¥¼­É¥X";
         }
         s += "\n";
         return s;
-    }   
+    }    
 }

@@ -5,6 +5,7 @@ public class Admin extends User{
     //constructor
     public Admin(String name, String password, String email){
         super(name, password, email);
+        setIden("Admin");
     }
 
     
@@ -14,7 +15,7 @@ public class Admin extends User{
         String name = JOptionPane.showInputDialog(null, "請輸入書名:");
         String author = JOptionPane.showInputDialog(null, "請輸入作者:");
         String publisher = JOptionPane.showInputDialog(null, "請輸入出版社:");
-	  String page = JOptionPane.showInputDialog("請輸入頁數");
+	    String page = JOptionPane.showInputDialog("請輸入頁數");
         Main.books.put(isbn, new Book(isbn, name, author, publisher, page));
         FileWriter filewriter = new FileWriter("books.txt", true);
         filewriter.write(isbn+" "+name+" "+author+" "+publisher+" "+page+"\r\n");

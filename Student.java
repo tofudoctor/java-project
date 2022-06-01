@@ -6,6 +6,7 @@ public class Student extends Member{
     public Student(String name, String password, String email){
         super(name, password, email);
         setCount(0);
+        setIden("Student");
     }
     //service methods
     public int getCount() {
@@ -18,7 +19,7 @@ public class Student extends Member{
     //functional methods
     public void borrow_book(){
         String isbn = JOptionPane.showInputDialog(null, "請輸入要借的書籍的isbn:");
-        if(this.count<=10){
+        if(this.count<2){
             Calendar now =  Calendar.getInstance();
             books.add(Main.books.get(isbn));
             this.count++;
@@ -29,7 +30,7 @@ public class Student extends Member{
             JOptionPane.showMessageDialog(null, "借書成功\n還書日期為: "+now.get(Calendar.DATE)+"天後");
         }
         else{
-            JOptionPane.showMessageDialog(null, "最多借10本!!!");
+            JOptionPane.showMessageDialog(null, "最多借2本!!!");
         }
     }
     public void return_book(){
