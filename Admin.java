@@ -16,7 +16,7 @@ public class Admin extends User{
         String author = JOptionPane.showInputDialog(null, "請輸入作者:");
         String publisher = JOptionPane.showInputDialog(null, "請輸入出版社:");
 	    String page = JOptionPane.showInputDialog("請輸入頁數");
-        Main.books.put(isbn, new Book(isbn, name, author, publisher, page));
+        Main.books.put(isbn, new Book(isbn, name, author, publisher, page, false, 0, 0, null));
         FileWriter filewriter = new FileWriter("books.txt", true);
         filewriter.write(isbn+" "+name+" "+author+" "+publisher+" "+page+"\r\n");
         filewriter.close();

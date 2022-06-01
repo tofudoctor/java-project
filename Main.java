@@ -5,15 +5,9 @@ public class Main{
     static HashMap<String, User> users = new HashMap<String, User>();
     static TreeMap<String, Book> books = new TreeMap<String, Book>();
     public static void init()throws IOException{
-        File doc1 = new File("books.txt");
+        //iden name ps email
+        File doc1 = new File("users.txt");
         Scanner scanner = new Scanner(doc1);
-        while (scanner.hasNextLine()){
-            String tmp = scanner.nextLine();
-            String tmps[] = tmp.split(" ");
-            books.put(tmps[0], new Book(tmps[0], tmps[1], tmps[2], tmps[3], tmps[4]));
-        }
-        File doc2 = new File("users.txt");
-        scanner = new Scanner(doc2);
         while (scanner.hasNextLine()){
             String tmp = scanner.nextLine();
             String tmps[] = tmp.split(" ");
@@ -29,6 +23,31 @@ public class Main{
             else if(tmps[0].equals("Staff")){
                 users.put(tmps[3], new Staff(tmps[1], tmps[2], tmps[3]));
             }
+        }
+        //isbn bookname author publish page status year day email
+        File doc2 = new File("books.txt");
+        scanner = new Scanner(doc2);
+        while (scanner.hasNextLine()){
+            String tmp = scanner.nextLine();
+            String tmps[] = tmp.split(" ");
+            if(tmps[5].equals("false"))
+                books.put(tmps[0], new Book(tmps[0], tmps[1], tmps[2], tmps[3], tmps[4], false, Integer.parseInt(tmps[6]), Integer.parseInt(tmps[7]),tmps[8]));
+            else{
+                books.put(tmps[0], new Book(tmps[0], tmps[1], tmps[2], tmps[3], tmps[4], true, Integer.parseInt(tmps[6]), Integer.parseInt(tmps[7]),tmps[8]));
+                if(users.get(tmps[8]) instanceof Student){
+                    Student s = (Student)users.get(tmps[8]);
+                    s.books.add(books.get(tmps[0]));
+                }
+                else if(users.get(tmps[8]) instanceof Teacher){
+                    Teacher s = (Teacher)users.get(tmps[8]);
+                    s.books.add(books.get(tmps[0]));
+                }
+                else if(users.get(tmps[8]) instanceof Staff){
+                    Staff s = (Staff)users.get(tmps[8]);
+                    s.books.add(books.get(tmps[0]));
+                }
+                
+            } 
         }
     }
     public static Book search(){
@@ -86,7 +105,7 @@ public class Main{
     public static void save()throws IOException{
         FileWriter filewriter = new FileWriter("books.txt");
         for(Map.Entry<String, Book> it:books.entrySet()){
-            filewriter.write(it.getValue().getIsbn()+" "+it.getValue().getName()+" "+it.getValue().getAuthor()+" "+it.getValue().getPublisher()+"\r\n");
+            filewriter.write(it.getValue().getIsbn()+" "+it.getValue().getName()+" "+it.getValue().getAuthor()+" "+it.getValue().getPublisher()+" "+it.getValue().getPage()+" "+it.getValue().getLend()+" "+it.getValue().getReturn_year()+" "+it.getValue().getReturn_day()+" "+it.getValue().getWho()+"\r\n");
         }
         filewriter.close();
     } 
