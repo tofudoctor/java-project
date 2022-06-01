@@ -122,7 +122,7 @@ public class Book {
         s += getIsbn();
         s += "\n出版商: ";
         s += getPublisher();
-	  s += "\n頁數: "
+	s += "\n頁數: "
         s += getPage();
         s += "\n租借狀態: ";
         if(getLend()){
