@@ -1,4 +1,4 @@
-101 C++學習 洪維恩 旗標出版社 1001 true 2022 158 strange@gmail.com
+101 C++學習 洪維恩 旗標出版社 1001 false 0 0 null
 11111 西遊記 王曉明 明日出版社 506 true 2022 158 one@gmail.com
 123455 數學之書 牛頓 自行出版 250 false 0 0 null
 123456 物理之書 牛頓 自行出版 700 false 0 0 null

@@ -48,6 +48,7 @@ public class Student extends Member{
         Main.books.get(isbn).setLend(false);
         Main.books.get(isbn).setReturn_day(0);
         Main.books.get(isbn).setReturn_year(0);
+        Main.books.get(isbn).setWho(null);
     }
     public String toString(){
         String s="§A¦n¡A";
