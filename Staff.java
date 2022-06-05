@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.util.*;
 public class Staff extends Member{
-    private int count;
+    //private int count;
     //constructor
     public Staff(String name, String password, String email){
         super(name, password, email);

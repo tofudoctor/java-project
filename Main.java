@@ -37,14 +37,17 @@ public class Main{
                 if(users.get(tmps[8]) instanceof Student){
                     Student s = (Student)users.get(tmps[8]);
                     s.books.add(books.get(tmps[0]));
+                    s.count++;
                 }
                 else if(users.get(tmps[8]) instanceof Teacher){
                     Teacher s = (Teacher)users.get(tmps[8]);
                     s.books.add(books.get(tmps[0]));
+                    s.count++;
                 }
                 else if(users.get(tmps[8]) instanceof Staff){
                     Staff s = (Staff)users.get(tmps[8]);
                     s.books.add(books.get(tmps[0]));
+                    s.count++;
                 }
                 
             } 
