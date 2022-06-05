@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 import javax.swing.*;
+import java.awt.EventQueue;
+
 public class Main{
     static HashMap<String, User> users = new HashMap<String, User>();
     static TreeMap<String, Book> books = new TreeMap<String, Book>();
@@ -10,6 +12,7 @@ public class Main{
         Scanner scanner = new Scanner(doc1);
         while (scanner.hasNextLine()){
             String tmp = scanner.nextLine();
+            System.out.println(tmp);
             String tmps[] = tmp.split(" ");
             if(tmps[0].equals("Admin")){
                 users.put(tmps[3], new Admin(tmps[1], tmps[2], tmps[3]));
@@ -114,13 +117,22 @@ public class Main{
     } 
     public static void main(String[] args)throws IOException{
         init();
-        while(true){
-            String email = JOptionPane.showInputDialog(null, "請輸入您的E-mail:");
-            if(email == null){
-                break;
-            }
+        EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					login mainframe = new login();
+					mainframe.setVisible(true);
+                    
+                    /*while(mainframe.control){
+                        mainframe.setVisible(true);
+                    }*/
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+        /*while(true){
             if(users.containsKey(email)){
-                String password = JOptionPane.showInputDialog(null, "請輸入您的密碼:");
                 System.out.print(users.get(email).getPassword());
                 if(users.get(email).getPassword().equals(password)){
                     //login success
@@ -141,7 +153,7 @@ public class Main{
                     continue;
                 }
             }
-        }
+        }*/
         save();
     } 
 }
