@@ -1,6 +1,0 @@
-Admin ¤ý¾å©ú 123456 abc@gmail.com
-Admin ¤ý 123456 wang@gmail.com
-Student ©_²§³Õ¤h 123456 strange@gmail.com
-Teacher ¥j¤@ 123456 one@gmail.com
-Staff X±Ð±Â 123456 prof@gmail.com
-Student Peter 1234 peter@gmail.com
