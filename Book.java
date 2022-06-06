@@ -21,7 +21,17 @@ public class Book {
         setReturn_year(return_year);
         setWho(who);
     }
-
+    public Book(String isbn, String name, String author, String publisher, String page, boolean lend) {
+        setIsbn(isbn);
+        setName(name);
+        setAuthor(author);
+        setPublisher(publisher);
+        setLend(lend);
+	    setPage(page);
+        setReturn_day(0);
+        setReturn_year(0);
+        setWho(null);
+    }
 
     //service methods
     public String getIsbn() {
