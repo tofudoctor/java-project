@@ -1,3 +1,22 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JSeparator;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.*;
 import javax.swing.*;
 import java.io.*;
 public class Admin extends User{
@@ -49,8 +68,20 @@ public class Admin extends User{
         s += " 管理員\n";
         return s;
     }
-    public boolean gui()throws IOException{
-        String operation[] = {"新增", "刪除", "搜尋", "離開"}; 
+    public void gui()throws IOException{
+        
+        EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Gui frame = new Gui();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+        /*String operation[] = {"新增", "刪除", "搜尋", "離開"}; 
         int operation_option = JOptionPane.showOptionDialog(null, this.toString()+"請選擇功能", null, 1, 1, null, operation, null);
         if(operation_option == 0){
             add_book();
@@ -66,6 +97,6 @@ public class Admin extends User{
         }
         else{
             return false;
-        }
+        }*/
     }
 }

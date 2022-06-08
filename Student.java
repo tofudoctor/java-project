@@ -56,8 +56,8 @@ public class Student extends Member{
         s += " 學生\n";
         return s;
     }
-    public boolean gui(){
-        String operation[] = {"借書", "還書", "搜尋", "紀錄", "離開"}; 
+    public void gui(){
+        /*String operation[] = {"借書", "還書", "搜尋", "紀錄", "離開"}; 
         int operation_option = JOptionPane.showOptionDialog(null, this.toString()+"請選擇功能", null, 1, 1, null, operation, null);
         if(operation_option == 0){
             borrow_book();
@@ -82,6 +82,6 @@ public class Student extends Member{
         }
         else{
             return false;
-        }
+        }*/
     }
 }

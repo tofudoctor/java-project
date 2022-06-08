@@ -111,6 +111,7 @@ public class Main{
     public static void save()throws IOException{
         FileWriter filewriter = new FileWriter("books.txt");
         for(Map.Entry<String, Book> it:books.entrySet()){
+            System.out.println(it);
             filewriter.write(it.getValue().getIsbn()+" "+it.getValue().getName()+" "+it.getValue().getAuthor()+" "+it.getValue().getPublisher()+" "+it.getValue().getPage()+" "+it.getValue().getLend()+" "+it.getValue().getReturn_year()+" "+it.getValue().getReturn_day()+" "+it.getValue().getWho()+"\r\n");
         }
         filewriter.close();
@@ -122,7 +123,7 @@ public class Main{
 				try {
 					login mainframe = new login();
 					mainframe.setVisible(true);
-                    
+                    save();
                     /*while(mainframe.control){
                         mainframe.setVisible(true);
                     }*/
@@ -154,6 +155,6 @@ public class Main{
                 }
             }
         }*/
-        save();
+        
     } 
 }

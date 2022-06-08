@@ -18,13 +18,14 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 public class login extends JFrame {
 	//JFrame frame = new JFrame();
-	private JPanel contentPane;
-	private final JPanel loginpanel = new JPanel();
-	private JTextField emailtextfield;
-	private JPasswordField passwordfield;
+	public JPanel contentPane;
+	public final JPanel loginpanel = new JPanel();
+	public JTextField emailtextfield;
+	public JPasswordField passwordfield;
 
 	/**
 	 * Launch the application.
@@ -40,7 +41,18 @@ public class login extends JFrame {
 		panel.setBackground(new Color(109, 70, 107));
 	}
 	public login() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+    		public void windowClosing(WindowEvent event) {
+				try{
+					Main.save();
+    				System.exit(0);
+				}
+				catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+		});
 		setBounds(100, 100, 960, 540);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,7 +80,7 @@ public class login extends JFrame {
 		loginpanel.add(passwordfield);
 		
 		JLabel welcome = new JLabel("");
-		welcome.setIcon(new ImageIcon("login.png"));
+		welcome.setIcon(new ImageIcon("Images/login.png"));
 		welcome.setFont(new Font("微軟正黑體", Font.BOLD, 60));
 		welcome.setBounds(292, 63, 60, 70);
 		loginpanel.add(welcome);
@@ -78,7 +90,7 @@ public class login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String email = emailtextfield.getText();
-				System.out.println(email);
+				//System.out.println(email);
 				String ps = new String(passwordfield.getPassword());
 				if(Main.users.get(email) == null){
 					JOptionPane.showMessageDialog(null, "帳號不存在");
@@ -87,7 +99,7 @@ public class login extends JFrame {
 					JOptionPane.showMessageDialog(null, "登入成功");
 					dispose();
 					try {
-						while(Main.users.get(email).gui());
+						Main.users.get(email).gui();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -207,7 +219,7 @@ public class login extends JFrame {
 		sidebar1.setLayout(null);
 		
 		JLabel sidebarpic1 = new JLabel("");
-		sidebarpic1.setIcon(new ImageIcon("find.png"));
+		sidebarpic1.setIcon(new ImageIcon("Images/find.png"));
 		sidebarpic1.setBounds(40, 10, 47, 43);
 		sidebar1.add(sidebarpic1);
 		
@@ -225,7 +237,7 @@ public class login extends JFrame {
 		sidebar.add(sidebar2);
 		
 		JLabel sidebarpic2 = new JLabel("");
-		sidebarpic2.setIcon(new ImageIcon("register.png"));
+		sidebarpic2.setIcon(new ImageIcon("Images/register.png"));
 		sidebarpic2.setBounds(40, 10, 47, 43);
 		sidebar2.add(sidebarpic2);
 		
@@ -243,7 +255,7 @@ public class login extends JFrame {
 		
 		JLabel sidebarpic3 = new JLabel("");
 		sidebarpic3.setBounds(40, 10, 47, 43);
-		sidebarpic3.setIcon(new ImageIcon("home.png"));
+		sidebarpic3.setIcon(new ImageIcon("Images/home1.png"));
 		sidebar3.add(sidebarpic3);
 		
 		JLabel sidebar3label = new JLabel("\u56DE\u9996\u9801");
@@ -251,7 +263,7 @@ public class login extends JFrame {
 		sidebar3label.setFont(new Font("微軟正黑體", Font.BOLD, 24));
 		sidebar3label.setBounds(97, 0, 213, 53);
 		sidebar3.add(sidebar3label);
-
+		//isbnsearch
 		JPanel sidebar4 = new JPanel();
 		
 		sidebar4.setLayout(null);
@@ -260,7 +272,7 @@ public class login extends JFrame {
 		sidebar.add(sidebar4);
 		
 		JLabel sidebarpic4 = new JLabel("");
-		sidebarpic4.setIcon(new ImageIcon("isbnsearch.png"));
+		sidebarpic4.setIcon(new ImageIcon("Images/isbnsearch.png"));
 		sidebarpic4.setBounds(40, 10, 47, 43);
 		sidebar4.add(sidebarpic4);
 		
@@ -270,6 +282,41 @@ public class login extends JFrame {
 		sidebar4label.setBounds(97, 0, 213, 53);
 		sidebar4.add(sidebar4label);
 		sidebar4.setVisible(false);
+
+		//回首頁
+		JPanel sidebar5 = new JPanel();
+		sidebar5.setLayout(null);
+		sidebar5.setBackground(new Color(109, 70, 107));
+		sidebar5.setBounds(0, 319, 300, 53);
+		sidebar.add(sidebar5);
+		//home find
+		JLabel sidebarpic5 = new JLabel(new ImageIcon("Images/home2.png"));
+		sidebarpic5.setBounds(40, 10, 47, 43);
+		sidebar5.add(sidebarpic5);
+		
+		JLabel sidebar5label = new JLabel("\u56DE\u9996\u9801");
+		sidebar5label.setForeground(Color.WHITE);
+		sidebar5label.setFont(new Font("微軟正黑體", Font.BOLD, 24));
+		sidebar5label.setBounds(97, 0, 213, 53);
+		sidebar5.add(sidebar5label);
+		sidebar5.setVisible(false);
+		//contains search
+		JPanel sidebar6 = new JPanel();
+		sidebar6.setLayout(null);
+		sidebar6.setBackground(new Color(109, 70, 107));
+		sidebar6.setBounds(0, 268, 300, 53);
+		sidebar.add(sidebar6);
+		
+		JLabel sidebarpic6 = new JLabel(new ImageIcon("Images/consearch.png"));
+		sidebarpic6.setBounds(40, 10, 47, 43);
+		sidebar6.add(sidebarpic6);
+		
+		JLabel sidebar6label = new JLabel("\u4EE5\u540D\u5B57\u641C\u5C0B");
+		sidebar6label.setForeground(Color.WHITE);
+		sidebar6label.setFont(new Font("微軟正黑體", Font.BOLD, 24));
+		sidebar6label.setBounds(97, 0, 213, 53);
+		sidebar6.add(sidebar6label);
+		sidebar6.setVisible(false);
 
 		Vector<String> header = new Vector<String>();
 		header.add("ISBN");
@@ -317,7 +364,10 @@ public class login extends JFrame {
 				loginpanel.setVisible(false);
 				findpanel.setVisible(true);
 				sidebar2.setVisible(false);
+				sidebar3.setVisible(false);
 				sidebar4.setVisible(true);
+				sidebar5.setVisible(true);
+				sidebar6.setVisible(true);
 			}
 		});
 		sidebar2.addMouseListener(new MouseAdapter() {
@@ -343,6 +393,7 @@ public class login extends JFrame {
 				findpanel.setVisible(false);
 				sidebar4.setVisible(false);
 				sidebar2.setVisible(true);
+				sidebar3.setVisible(true);
 			}
 		});
 		sidebar4.addMouseListener(new MouseAdapter() {
@@ -356,6 +407,77 @@ public class login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Main.search();
+			}
+		});
+		sidebar5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setcolor(sidebar5);
+			}
+			public void mouseExited(MouseEvent e) {
+				resetcolor(sidebar5);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loginpanel.setVisible(true);
+				findpanel.setVisible(false);
+				sidebar4.setVisible(false);
+				sidebar2.setVisible(true);
+				sidebar3.setVisible(true);
+				sidebar5.setVisible(false);
+			}
+		});
+		sidebar6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setcolor(sidebar6);
+			}
+			public void mouseExited(MouseEvent e) {
+				resetcolor(sidebar6);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String s = JOptionPane.showInputDialog(null, "請輸入書本名字(不完整也可以):");
+				Vector<String> header = new Vector<String>();
+				header.add("ISBN");
+				header.add("名字");
+				header.add("作者");
+				header.add("出版社");
+				header.add("頁數");
+				header.add("狀態");
+				Vector<Vector<String>> data = new Vector<Vector<String>>();
+				//String [][] data={{"akash","20"},{"pankaj","24"},{"pankaj","24"},{"pankaj","24"},{"pankaj","24"}};
+				for(Map.Entry<String, Book> it:Main.books.entrySet()){
+					if(it.getValue().getName().contains(s)){
+						Vector<String> tmp = new Vector<String>();
+						tmp.add(it.getValue().getIsbn());
+						tmp.add(it.getValue().getName());
+						tmp.add(it.getValue().getAuthor());
+						tmp.add(it.getValue().getPublisher());
+						tmp.add(it.getValue().getPage());
+						if(it.getValue().getLend()){
+							tmp.add("已借出");
+						}
+						else{
+							tmp.add("未借出");
+						}
+						data.add(tmp);
+					}
+					
+				}
+				if(data.isEmpty()){
+					JOptionPane.showMessageDialog(null, "本圖書館沒有名字包含"+ s +"的書!");
+				}
+				else{
+					JTable table = new JTable(data, header);
+					JScrollPane findpanel=new JScrollPane(table);
+					//findpanel.setBackground(new Color(255, 255, 255));
+					table.setBounds(300, 0, 646, 511);
+					findpanel.setBounds(298, 0, 660, 540);
+					findpanel.setVisible(true);
+					getContentPane().add(findpanel);
+				}
+				
 			}
 		});
 	}

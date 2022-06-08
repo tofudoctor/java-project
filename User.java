@@ -42,5 +42,5 @@ public abstract class User {
         this.iden = iden;
     }
     //functional methods
-    public abstract boolean gui()throws IOException; 
+    public abstract void gui()throws IOException; 
 }
