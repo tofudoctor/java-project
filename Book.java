@@ -27,7 +27,7 @@ public class Book {
         setAuthor(author);
         setPublisher(publisher);
         setLend(lend);
-	    setPage(page);
+	  setPage(page);
         setReturn_day(0);
         setReturn_year(0);
         setWho(null);

@@ -34,7 +34,7 @@ public class Admin extends User{
         String name = JOptionPane.showInputDialog(null, "請輸入書名:");
         String author = JOptionPane.showInputDialog(null, "請輸入作者:");
         String publisher = JOptionPane.showInputDialog(null, "請輸入出版社:");
-	    String page = JOptionPane.showInputDialog("請輸入頁數");
+	  String page = JOptionPane.showInputDialog("請輸入頁數");
         Main.books.put(isbn, new Book(isbn, name, author, publisher, page, false, 0, 0, null));
         FileWriter filewriter = new FileWriter("books.txt", true);
         filewriter.write(isbn+" "+name+" "+author+" "+publisher+" "+page+"\r\n");
@@ -59,7 +59,8 @@ public class Admin extends User{
             JOptionPane.showMessageDialog(null, "查無此書!\n無法修改!");
         }
         else{
-            Main.books.remove(isbn);
+		Main.books.remove(isbn);
+		add_book();
         }
     }
     public String toString(){
@@ -81,20 +82,24 @@ public class Admin extends User{
 			}
 		});
 
-        /*String operation[] = {"新增", "刪除", "搜尋", "離開"}; 
+        /*String operation[] = {"新增", "刪除", "搜尋", "編輯" ,"離開"}; 
         int operation_option = JOptionPane.showOptionDialog(null, this.toString()+"請選擇功能", null, 1, 1, null, operation, null);
         if(operation_option == 0){
             add_book();
             return true;
         }
-        else if(operation_option == 1){
+        else if (operation_option == 1){
             delete_book();
             return true;
         }
-        else if(operation_option == 2){
+        else if (operation_option == 2){
             Main.search();
             return true;
         }
+	  else if (operation_option == 3){
+		modify();
+		return true;
+	  }
         else{
             return false;
         }*/
