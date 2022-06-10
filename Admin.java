@@ -73,30 +73,12 @@ public class Admin extends User{
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Gui frame = new Gui();
+					Gui_Admin frame = new Gui_Admin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-
-        /*String operation[] = {"新增", "刪除", "搜尋", "離開"}; 
-        int operation_option = JOptionPane.showOptionDialog(null, this.toString()+"請選擇功能", null, 1, 1, null, operation, null);
-        if(operation_option == 0){
-            add_book();
-            return true;
-        }
-        else if(operation_option == 1){
-            delete_book();
-            return true;
-        }
-        else if(operation_option == 2){
-            Main.search();
-            return true;
-        }
-        else{
-            return false;
-        }*/
     }
 }

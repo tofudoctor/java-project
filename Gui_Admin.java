@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.*;
 import java.awt.event.*;
 
-public class Gui extends JFrame {
+public class Gui_Admin extends JFrame {
 
 	private JPanel contentPane;
 	public JTextField book_name;
@@ -41,7 +41,7 @@ public class Gui extends JFrame {
 	void resetcolor(JPanel panel){
 		panel.setBackground(new Color(109, 70, 107));
 	}
-	public Gui() throws IOException{
+	public Gui_Admin() throws IOException{
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
     		public void windowClosing(WindowEvent event) {
@@ -583,11 +583,11 @@ public class Gui extends JFrame {
 		JLabel teamlabel = new JLabel("\u5716\u66F8\u9928\u7BA1\u7406\u7CFB\u7D71");
 		teamlabel.setForeground(Color.WHITE);
 		teamlabel.setFont(new Font("微軟正黑體", Font.BOLD, 30));
-		teamlabel.setBounds(40, 50, 227, 60);
+		teamlabel.setBounds(40, 34, 227, 60);
 		sidebar.add(teamlabel);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 134, 280, 19);
+		separator.setBounds(10, 92, 280, 19);
 		sidebar.add(separator);
 		
 		JPanel sidebarsearch = new JPanel();
@@ -638,7 +638,7 @@ public class Gui extends JFrame {
 		});
 		sidebarsearch.setLayout(null);
 		sidebarsearch.setBackground(new Color(109, 70, 107));
-		sidebarsearch.setBounds(0, 163, 300, 53);
+		sidebarsearch.setBounds(0, 110, 300, 53);
 		sidebar.add(sidebarsearch);
 		
 		JLabel sidebarpic1 = new JLabel(new ImageIcon("Images/find.png"));
@@ -648,9 +648,120 @@ public class Gui extends JFrame {
 		JLabel findlabel = new JLabel("\u67E5\u8A62\u66F8\u7C4D");
 		findlabel.setForeground(Color.WHITE);
 		findlabel.setFont(new Font("微軟正黑體", Font.BOLD, 24));
-		findlabel.setBounds(97, 0, 161, 53);
+		findlabel.setBounds(97, 0, 203, 53);
 		sidebarsearch.add(findlabel);
 		
+
+		JPanel sidebarisbnsearch = new JPanel();
+		sidebarisbnsearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setcolor(sidebarisbnsearch);
+			}
+			public void mouseExited(MouseEvent e) {
+				resetcolor(sidebarisbnsearch);
+			}
+			public void mouseClicked(MouseEvent e) {
+				addbookpanel.setVisible(false);
+				modifybookpanel.setVisible(false);
+				deletebookpanel.setVisible(false);
+				findpanel.setVisible(true);
+				Main.search();
+			}
+		});
+		sidebarisbnsearch.setLayout(null);
+		sidebarisbnsearch.setBackground(new Color(109, 70, 107));
+		sidebarisbnsearch.setBounds(0, 162, 300, 53);
+		sidebar.add(sidebarisbnsearch);
+
+		JLabel sidebarpic6 = new JLabel("");
+		sidebarpic6.setIcon(new ImageIcon("Images/isbnsearch.png"));
+		sidebarpic6.setBounds(40, 10, 47, 43);
+		sidebarisbnsearch.add(sidebarpic6);
+
+		JLabel sidebarlabelisbnsearsh = new JLabel("\u4EE5ISBN\u641C\u5C0B");
+		sidebarlabelisbnsearsh.setForeground(Color.WHITE);
+		sidebarlabelisbnsearsh.setFont(new Font("微軟正黑體", Font.BOLD, 24));
+		sidebarlabelisbnsearsh.setBounds(97, 0, 203, 53);
+		sidebarisbnsearch.add(sidebarlabelisbnsearsh);
+		sidebarisbnsearch.setVisible(true);
+
+
+		JPanel sidebarconsearch = new JPanel();
+		sidebarconsearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setcolor(sidebarconsearch);
+			}
+			public void mouseExited(MouseEvent e) {
+				resetcolor(sidebarconsearch);
+			}
+			public void mouseClicked(MouseEvent e) {
+				addbookpanel.setVisible(false);
+				modifybookpanel.setVisible(false);
+				deletebookpanel.setVisible(false);
+				//findpanel.setVisible(false);
+				String s = JOptionPane.showInputDialog(null, "請輸入書本名字(不完整也可以):");
+				Vector<String> header = new Vector<String>();
+				header.add("ISBN");
+				header.add("名字");
+				header.add("作者");
+				header.add("出版社");
+				header.add("頁數");
+				header.add("狀態");
+				Vector<Vector<String>> data = new Vector<Vector<String>>();
+				//String [][] data={{"akash","20"},{"pankaj","24"},{"pankaj","24"},{"pankaj","24"},{"pankaj","24"}};
+				for(Map.Entry<String, Book> it:Main.books.entrySet()){
+					if(it.getValue().getName().contains(s)){
+						Vector<String> tmp = new Vector<String>();
+						tmp.add(it.getValue().getIsbn());
+						tmp.add(it.getValue().getName());
+						tmp.add(it.getValue().getAuthor());
+						tmp.add(it.getValue().getPublisher());
+						tmp.add(it.getValue().getPage());
+						if(it.getValue().getLend()){
+							tmp.add("已借出");
+						}
+						else{
+							tmp.add("未借出");
+						}
+						data.add(tmp);
+					}
+					
+				}
+				if(data.isEmpty()){
+					JOptionPane.showMessageDialog(null, "本圖書館沒有名字包含"+ s +"的書!");
+				}
+				else{
+					JTable table = new JTable(data, header);
+					JScrollPane findpanelcon=new JScrollPane(table);
+					//findpanel.setBackground(new Color(255, 255, 255));
+					table.setBounds(300, 0, 646, 511);
+					findpanelcon.setBounds(298, 0, 660, 540);
+					findpanelcon.setVisible(true);
+					getContentPane().add(findpanelcon);
+				}
+			}
+		});
+		sidebarconsearch.setLayout(null);
+		sidebarconsearch.setBackground(new Color(109, 70, 107));
+		sidebarconsearch.setBounds(0, 215, 300, 53);
+		sidebar.add(sidebarconsearch);
+
+		JLabel sidebarpic7 = new JLabel("");
+		sidebarpic7.setIcon(new ImageIcon("Images/consearch.png"));
+		sidebarpic7.setBounds(40, 10, 47, 43);
+		sidebarconsearch.add(sidebarpic7);
+
+		JLabel sidebarlabelconsearsh = new JLabel("\u4EE5\u540D\u5B57\u641C\u5C0B");
+		sidebarlabelconsearsh.setForeground(Color.WHITE);
+		sidebarlabelconsearsh.setFont(new Font("微軟正黑體", Font.BOLD, 24));
+		sidebarlabelconsearsh.setBounds(97, 0, 203, 53);
+		sidebarconsearch.add(sidebarlabelconsearsh);
+		sidebarconsearch.setVisible(true);
+
+
+
 		JPanel sidebaradd = new JPanel();
 		sidebaradd.addMouseListener(new MouseAdapter() {
 			@Override
@@ -669,7 +780,7 @@ public class Gui extends JFrame {
 		});
 		sidebaradd.setLayout(null);
 		sidebaradd.setBackground(new Color(109, 70, 107));
-		sidebaradd.setBounds(0, 215, 300, 53);
+		sidebaradd.setBounds(0, 268, 300, 53);
 		sidebar.add(sidebaradd);
 		
 		JLabel sidebarpic2 = new JLabel(new ImageIcon("Images/add.png"));
@@ -700,7 +811,7 @@ public class Gui extends JFrame {
 		});
 		sidebardelete.setLayout(null);
 		sidebardelete.setBackground(new Color(109, 70, 107));
-		sidebardelete.setBounds(0, 268, 300, 53);
+		sidebardelete.setBounds(0, 319, 300, 53);
 		sidebar.add(sidebardelete);
 		
 		JLabel sidebarpic3 = new JLabel(new ImageIcon("Images/delete.png"));
@@ -731,7 +842,7 @@ public class Gui extends JFrame {
 		});
 		sidebarmodify.setLayout(null);
 		sidebarmodify.setBackground(new Color(109, 70, 107));
-		sidebarmodify.setBounds(0, 319, 300, 53);
+		sidebarmodify.setBounds(0, 371, 300, 53);
 		sidebar.add(sidebarmodify);
 		
 		JLabel sidebarpic4 = new JLabel(new ImageIcon("Images/modify.png"));
@@ -786,7 +897,7 @@ public class Gui extends JFrame {
 		});
 		sidebarlogout.setLayout(null);
 		sidebarlogout.setBackground(new Color(109, 70, 107));
-		sidebarlogout.setBounds(0, 371, 300, 53);
+		sidebarlogout.setBounds(0, 423, 300, 53);
 		sidebar.add(sidebarlogout);
 		
 		JLabel sidebarpic5 = new JLabel(new ImageIcon("Images/logout.png"));
@@ -799,23 +910,6 @@ public class Gui extends JFrame {
 		sidebarlabellogout.setBounds(97, 0, 213, 53);
 		sidebarlogout.add(sidebarlabellogout);
 		
-		JPanel sidebarisbnsearch = new JPanel();
-		sidebarisbnsearch.setVisible(false);
-		sidebarisbnsearch.setLayout(null);
-		sidebarisbnsearch.setBackground(new Color(109, 70, 107));
-		sidebarisbnsearch.setBounds(0, 215, 300, 53);
-		sidebar.add(sidebarisbnsearch);
 		
-		JLabel sidebarpic6 = new JLabel("");
-		sidebarpic6.setIcon(new ImageIcon("Images/isbnsearch.png"));
-		sidebarpic6.setBounds(40, 10, 47, 43);
-		sidebarisbnsearch.add(sidebarpic6);
-		
-		/*JLabel sidebarlabelisbnsearsh = new JLabel("\u4EE5ISBN\u641C\u5C0B(\u8F03\u5FEB)");
-		sidebarlabelisbnsearsh.setForeground(Color.WHITE);
-		sidebarlabelisbnsearsh.setFont(new Font("微軟正黑體", Font.BOLD, 24));
-		sidebarlabelisbnsearsh.setBounds(97, 0, 213, 53);
-		sidebarisbnsearch.add(sidebarlabelisbnsearsh);
-		sidebarisbnsearch.setVisible(false);*/
 	}
 }

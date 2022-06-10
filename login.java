@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class login extends JFrame {
 	//JFrame frame = new JFrame();
@@ -26,6 +27,9 @@ public class login extends JFrame {
 	public final JPanel loginpanel = new JPanel();
 	public JTextField emailtextfield;
 	public JPasswordField passwordfield;
+	public JTextField remailtextfield;
+	public JPasswordField rpasswordfield;
+	public JTextField nametextfield;
 
 	/**
 	 * Launch the application.
@@ -78,6 +82,39 @@ public class login extends JFrame {
 		passwordfield.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(109, 70, 107)));
 		passwordfield.setOpaque(false);
 		loginpanel.add(passwordfield);
+
+		JLabel eye = new JLabel("");
+		eye.setIcon(new ImageIcon("Images/eye.png"));
+		eye.setBounds(522, 233, 39, 32);
+		loginpanel.add(eye);
+		eye.setVisible(true);
+		contentPane.setLayout(null);
+
+		JLabel eye1 = new JLabel("");
+		eye1.setIcon(new ImageIcon("Images/eye1.png"));
+		eye1.setBounds(522, 233, 39, 32);
+		loginpanel.add(eye1);
+		eye1.setVisible(false);
+		contentPane.setLayout(null);
+
+
+		eye.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				eye1.setVisible(true);
+				eye.setVisible(false);
+				passwordfield.setEchoChar((char)0);
+			}
+		});
+		eye1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				eye1.setVisible(false);
+				eye.setVisible(true);
+				passwordfield.setEchoChar('*');
+			}
+		});
+
 		
 		JLabel welcome = new JLabel("");
 		welcome.setIcon(new ImageIcon("Images/login.png"));
@@ -90,15 +127,16 @@ public class login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String email = emailtextfield.getText();
-				//System.out.println(email);
+				System.out.println(email);
 				String ps = new String(passwordfield.getPassword());
 				if(Main.users.get(email) == null){
 					JOptionPane.showMessageDialog(null, "帳號不存在");
 				}
 				else if(Main.users.containsKey(email) && Main.users.get(email).getPassword().equals(ps)){
-					JOptionPane.showMessageDialog(null, "登入成功");
+					JOptionPane.showMessageDialog(null, Main.users.get(email)+"登入成功");
 					dispose();
 					try {
+						Main.loginemail = email;
 						Main.users.get(email).gui();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
@@ -276,7 +314,7 @@ public class login extends JFrame {
 		sidebarpic4.setBounds(40, 10, 47, 43);
 		sidebar4.add(sidebarpic4);
 		
-		JLabel sidebar4label = new JLabel("\u4EE5ISBN\u641C\u5C0B(\u8F03\u5FEB)");
+		JLabel sidebar4label = new JLabel("\u4EE5ISBN\u641C\u5C0B");
 		sidebar4label.setForeground(Color.WHITE);
 		sidebar4label.setFont(new Font("微軟正黑體", Font.BOLD, 24));
 		sidebar4label.setBounds(97, 0, 213, 53);
@@ -349,7 +387,190 @@ public class login extends JFrame {
 	    findpanel.setBounds(298, 0, 660, 540);
 	    findpanel.setVisible(false);
 	    getContentPane().add(findpanel);
-	    
+
+		JPanel registerpanel = new JPanel();
+		registerpanel.setBackground(Color.WHITE);
+		registerpanel.setBounds(300, 0, 646, 511);
+		contentPane.add(registerpanel);
+		registerpanel.setLayout(null);
+		registerpanel.setVisible(false);
+
+		remailtextfield = new JTextField();
+		remailtextfield.setForeground(new Color(0, 0, 0));
+		remailtextfield.setFont(new Font("微軟正黑體", Font.PLAIN, 16));
+		remailtextfield.setBounds(138, 185, 373, 21);
+		remailtextfield.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(109, 70, 107)));
+		remailtextfield.setOpaque(false);
+		registerpanel.add(remailtextfield);
+		remailtextfield.setColumns(30);
+		
+		rpasswordfield = new JPasswordField();
+		rpasswordfield.setColumns(20);
+		rpasswordfield.setFont(new Font("微軟正黑體", Font.PLAIN, 16));
+		rpasswordfield.setBounds(138, 244, 373, 21);
+		rpasswordfield.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(109, 70, 107)));
+		rpasswordfield.setOpaque(false);
+		registerpanel.add(rpasswordfield);
+
+		nametextfield = new JTextField();
+		nametextfield.setForeground(new Color(0, 0, 0));
+		nametextfield.setFont(new Font("微軟正黑體", Font.PLAIN, 16));
+		nametextfield.setBounds(138, 302, 373, 21);
+		nametextfield.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(109, 70, 107)));
+		nametextfield.setOpaque(false);
+		registerpanel.add(nametextfield);
+		nametextfield.setColumns(30);
+
+		JLabel lblName = new JLabel("name");
+		lblName.setFont(new Font("微軟正黑體", Font.BOLD, 14));
+		lblName.setBounds(138, 261, 108, 31);
+		registerpanel.add(lblName);
+		contentPane.setLayout(null);
+
+		JLabel remaillabel = new JLabel("E-mail");
+		remaillabel.setFont(new Font("微軟正黑體", Font.BOLD, 14));
+		remaillabel.setBounds(138, 144, 108, 31);
+		registerpanel.add(remaillabel);
+		
+		JLabel rlblPassword = new JLabel("Password");
+		rlblPassword.setFont(new Font("微軟正黑體", Font.BOLD, 14));
+		rlblPassword.setBounds(138, 203, 108, 31);
+		registerpanel.add(rlblPassword);
+
+		JLabel lblNewLabel = new JLabel("\u8EAB\u5206");
+		lblNewLabel.setFont(new Font("微軟正黑體", Font.PLAIN, 16));
+		lblNewLabel.setBounds(138, 333, 49, 19);
+		registerpanel.add(lblNewLabel);
+		contentPane.setLayout(null);
+
+
+		String identification[] = {"管理員", "學生", "老師", "職員"}; 
+		JComboBox comboBox = new JComboBox(identification);
+		comboBox.setBounds(217, 333, 294, 29);
+		registerpanel.add(comboBox);
+		
+		JButton registerbutton = new JButton("\u8A3B\u518A");
+		registerbutton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try{
+					String new_email = remailtextfield.getText();
+					String new_name = nametextfield.getText();
+					String new_password = new String(rpasswordfield.getPassword());
+					if(Main.users.get(new_email) == null){
+						if(comboBox.getSelectedIndex() == 0){//admin
+							Main.users.put(new_email, new Admin(new_name, new_password, new_email));
+							FileWriter filewriter = new FileWriter("users.txt", true);
+							filewriter.write("Admin "+new_name+" "+new_password+" "+new_email+ "\r\n");
+							filewriter.close();
+						}
+						else if(comboBox.getSelectedIndex() == 1){//student
+							Main.users.put(new_email, new Student(new_name, new_password, new_email));
+							FileWriter filewriter = new FileWriter("users.txt", true);
+							filewriter.write("Student "+new_name+" "+new_password+" "+new_email+ "\r\n");
+							filewriter.close();
+						}
+						else if(comboBox.getSelectedIndex() == 2){//teacher
+							Main.users.put(new_email, new Teacher(new_name, new_password, new_email));
+							FileWriter filewriter = new FileWriter("users.txt", true);
+							filewriter.write("Teacher "+new_name+" "+new_password+" "+new_email+ "\r\n");
+							filewriter.close();
+						}
+						else {//staff
+							Main.users.put(new_email, new Staff(new_name, new_password, new_email));
+							FileWriter filewriter = new FileWriter("users.txt", true);
+							filewriter.write("Staff "+new_name+" "+new_password+" "+new_email+ "\r\n");
+							filewriter.close();
+						}
+						JOptionPane.showMessageDialog(null, "註冊成功!");
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "您的E-mail已被註冊過!");
+					}
+					remailtextfield.setText("");
+					nametextfield.setText("");
+					rpasswordfield.setText("");
+				}
+				catch(Exception io){
+					io.printStackTrace();
+				}
+			}
+		});
+		registerbutton.setFont(new Font("微軟正黑體", Font.PLAIN, 24));
+		registerbutton.setBounds(264, 389, 117, 31);
+		registerbutton.setBackground(Color.WHITE);
+		registerpanel.add(registerbutton);
+
+
+		JPanel rdecorateout_1 = new JPanel();
+		rdecorateout_1.setBounds(-187, 328, 280, 280);
+		//decorateout_1.setOpaque(false);
+		registerpanel.add(rdecorateout_1);
+		rdecorateout_1.setLayout(null);
+		
+		JPanel rdecoratein_1 = new JPanel();
+		//decoratein_1.setOpaque(false);
+		rdecoratein_1.setBackground(Color.WHITE);
+		rdecoratein_1.setBounds(10, 10, 260, 260);
+		rdecorateout_1.add(rdecoratein_1);
+		rdecoratein_1.setLayout(null);
+		
+		JPanel rdecorateout_6 = new JPanel();
+		rdecorateout_6.setBounds(145, 0, 86, 44);
+		rdecoratein_1.add(rdecorateout_6);
+		rdecorateout_6.setLayout(null);
+		
+		JPanel rdecoratein_6 = new JPanel();
+		rdecoratein_6.setBackground(Color.WHITE);
+		rdecoratein_6.setBounds(10, 0, 66, 34);
+		rdecorateout_6.add(rdecoratein_6);
+		
+		JPanel rdecorateout_2 = new JPanel();
+		rdecorateout_2.setLayout(null);
+		rdecorateout_2.setBounds(354, 430, 226, 121);
+		registerpanel.add(rdecorateout_2);
+		
+		JPanel rdecoratein_2 = new JPanel();
+		rdecoratein_2.setBackground(Color.WHITE);
+		rdecoratein_2.setBounds(10, 10, 206, 101);
+		rdecorateout_2.add(rdecoratein_2);
+		
+		JPanel rdecorateout_3 = new JPanel();
+		rdecorateout_3.setLayout(null);
+		rdecorateout_3.setBounds(-32, 287, 86, 78);
+		registerpanel.add(rdecorateout_3);
+		
+		JPanel rdecoratein_3 = new JPanel();
+		rdecoratein_3.setBackground(Color.WHITE);
+		rdecoratein_3.setBounds(10, 10, 66, 58);
+		rdecorateout_3.add(rdecoratein_3);
+		
+		JPanel rdecorateout_4 = new JPanel();
+		rdecorateout_4.setLayout(null);
+		rdecorateout_4.setBounds(530, -27, 86, 160);
+		registerpanel.add(rdecorateout_4);
+		
+		JPanel rdecoratein_4 = new JPanel();
+		rdecoratein_4.setBackground(Color.WHITE);
+		rdecoratein_4.setBounds(10, 10, 66, 140);
+		rdecorateout_4.add(rdecoratein_4);
+		
+		JPanel rdecorateout_5 = new JPanel();
+		rdecorateout_5.setLayout(null);
+		rdecorateout_5.setBounds(100, 45, 49, 50);
+		registerpanel.add(rdecorateout_5);
+		
+		JPanel rdecoratein_5 = new JPanel();
+		rdecoratein_5.setBackground(Color.WHITE);
+		rdecoratein_5.setBounds(10, 10, 29, 30);
+		rdecorateout_5.add(rdecoratein_5);
+		contentPane.setLayout(null);
+
+		JLabel rwelcome = new JLabel("");
+		rwelcome.setIcon(new ImageIcon("Images/login.png"));
+		rwelcome.setFont(new Font("微軟正黑體", Font.BOLD, 60));
+		rwelcome.setBounds(292, 63, 60, 70);
+		registerpanel.add(rwelcome);
 	    
 		sidebar1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -362,6 +583,7 @@ public class login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				loginpanel.setVisible(false);
+				registerpanel.setVisible(false);
 				findpanel.setVisible(true);
 				sidebar2.setVisible(false);
 				sidebar3.setVisible(false);
@@ -378,6 +600,15 @@ public class login extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				resetcolor(sidebar2);
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loginpanel.setVisible(false);
+				registerpanel.setVisible(true);
+				findpanel.setVisible(false);
+				sidebar4.setVisible(false);
+				sidebar2.setVisible(true);
+				sidebar3.setVisible(true);
+			}
 		});
 		sidebar3.addMouseListener(new MouseAdapter() {
 			@Override
@@ -390,6 +621,7 @@ public class login extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				loginpanel.setVisible(true);
+				registerpanel.setVisible(false);
 				findpanel.setVisible(false);
 				sidebar4.setVisible(false);
 				sidebar2.setVisible(true);

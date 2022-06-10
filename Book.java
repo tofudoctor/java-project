@@ -21,7 +21,7 @@ public class Book {
         setReturn_year(return_year);
         setWho(who);
     }
-    public Book(String isbn, String name, String author, String publisher, String page, boolean lend) {
+    /*public Book(String isbn, String name, String author, String publisher, String page, boolean lend) {
         setIsbn(isbn);
         setName(name);
         setAuthor(author);
@@ -31,7 +31,7 @@ public class Book {
         setReturn_day(0);
         setReturn_year(0);
         setWho(null);
-    }
+    }*/
 
     //service methods
     public String getIsbn() {
@@ -113,6 +113,28 @@ public class Book {
         }
     }
 
+    public static String date(int dayofyear, int year){
+        if((year%4==0 && year%100!=0) || year%400==0){
+        int m[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            for(int i=0;i<12;i++){
+                if(dayofyear<=m[i]){
+                    return year+"/"+(i+1)+"/"+dayofyear;
+                }
+                dayofyear-=m[i];
+            }
+        }
+        else //not leap year
+        {
+            int m[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+            for(int i=0;i<12;i++){
+                if(dayofyear<=m[i]){
+                    return year+"/"+(i+1)+"/"+dayofyear;
+                }
+                dayofyear-=m[i];
+            }
+        }
+        return "";
+    }
     //Output
     public String toString(){
         String s="®Ñ¦W: ";

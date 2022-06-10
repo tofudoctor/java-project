@@ -6,13 +6,13 @@ import java.awt.EventQueue;
 public class Main{
     static HashMap<String, User> users = new HashMap<String, User>();
     static TreeMap<String, Book> books = new TreeMap<String, Book>();
+    static String loginemail;
     public static void init()throws IOException{
         //iden name ps email
         File doc1 = new File("users.txt");
         Scanner scanner = new Scanner(doc1);
         while (scanner.hasNextLine()){
             String tmp = scanner.nextLine();
-            System.out.println(tmp);
             String tmps[] = tmp.split(" ");
             if(tmps[0].equals("Admin")){
                 users.put(tmps[3], new Admin(tmps[1], tmps[2], tmps[3]));
@@ -32,6 +32,7 @@ public class Main{
         scanner = new Scanner(doc2);
         while (scanner.hasNextLine()){
             String tmp = scanner.nextLine();
+            System.out.println(tmp);
             String tmps[] = tmp.split(" ");
             if(tmps[5].equals("false"))
                 books.put(tmps[0], new Book(tmps[0], tmps[1], tmps[2], tmps[3], tmps[4], false, Integer.parseInt(tmps[6]), Integer.parseInt(tmps[7]),tmps[8]));
@@ -54,6 +55,25 @@ public class Main{
                 }
                 
             } 
+        }
+        //isbn bookname author publish page status year day email
+        File doc3 = new File("record.txt");
+        scanner = new Scanner(doc3);
+        while (scanner.hasNextLine()){
+            String tmp = scanner.nextLine();;
+            String tmps[] = tmp.split(" ");
+            if(users.get(tmps[8]) instanceof Student){
+                Student s = (Student)users.get(tmps[8]);
+                s.record.add(new Book(tmps[0], tmps[1], tmps[2], tmps[3], tmps[4], false, Integer.parseInt(tmps[6]), Integer.parseInt(tmps[7]),tmps[8]));
+            }
+            else if(users.get(tmps[8]) instanceof Teacher){
+                Teacher s = (Teacher)users.get(tmps[8]);
+                s.record.add(new Book(tmps[0], tmps[1], tmps[2], tmps[3], tmps[4], false, Integer.parseInt(tmps[6]), Integer.parseInt(tmps[7]),tmps[8]));
+            }
+            else if(users.get(tmps[8]) instanceof Staff){
+                Staff s = (Staff)users.get(tmps[8]);
+                s.record.add(new Book(tmps[0], tmps[1], tmps[2], tmps[3], tmps[4], false, Integer.parseInt(tmps[6]), Integer.parseInt(tmps[7]),tmps[8]));
+            }        
         }
     }
     public static Book search(){
@@ -111,7 +131,6 @@ public class Main{
     public static void save()throws IOException{
         FileWriter filewriter = new FileWriter("books.txt");
         for(Map.Entry<String, Book> it:books.entrySet()){
-            System.out.println(it);
             filewriter.write(it.getValue().getIsbn()+" "+it.getValue().getName()+" "+it.getValue().getAuthor()+" "+it.getValue().getPublisher()+" "+it.getValue().getPage()+" "+it.getValue().getLend()+" "+it.getValue().getReturn_year()+" "+it.getValue().getReturn_day()+" "+it.getValue().getWho()+"\r\n");
         }
         filewriter.close();
@@ -132,29 +151,6 @@ public class Main{
 				}
 			}
 		});
-        /*while(true){
-            if(users.containsKey(email)){
-                System.out.print(users.get(email).getPassword());
-                if(users.get(email).getPassword().equals(password)){
-                    //login success
-                    JOptionPane.showMessageDialog(null, "登入成功");
-                    while(users.get(email).gui());
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "密碼錯誤!");
-                }
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "查無此帳號!");
-                int new_account_option = JOptionPane.showConfirmDialog(null, "要創立新帳號嗎?");
-                if(new_account_option == 0){//yes
-                    add_user();
-                }
-                else{//no cancel
-                    continue;
-                }
-            }
-        }*/
         
     } 
 }

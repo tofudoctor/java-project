@@ -1,10 +1,14 @@
 import javax.swing.*;
 import java.io.*;
+import java.util.*;
 public abstract class User {
-    protected String name;
-    protected String email;
+    public ArrayList<Book> books = new ArrayList<Book>();
+    public ArrayList<Book> record = new ArrayList<Book>();
+    protected  String name;
+    protected static String email;
     protected String password;
     protected String iden;
+    protected int count;
     //constructor
     public User(String name, String password, String email){
         setName(name);
@@ -12,9 +16,17 @@ public abstract class User {
         setEmail(email);
     }
     //service methods
-    public String getName() {
+    public  String getName() {
         return name;
     }
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -29,7 +41,7 @@ public abstract class User {
             this.password = password;
         }
     }
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
     public void setEmail(String email) {
