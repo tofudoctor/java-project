@@ -1,13 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
@@ -505,7 +501,7 @@ public class Gui_Admin extends JFrame {
 				String isbn = misbn_code.getText(); 
         		String author = mauthor_name.getText(); 
         		String publisher = mpublisher_name.getText(); 
-	    		String page = mpages.getText(); 
+	    		String page = mpages.getText();
 				if(Main.books.get(isbn) == null){
 					JOptionPane.showMessageDialog(null, "查無此書!\n無法修改!");
 				}

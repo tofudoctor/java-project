@@ -34,7 +34,7 @@ public class Admin extends User{
         String name = JOptionPane.showInputDialog(null, "請輸入書名:");
         String author = JOptionPane.showInputDialog(null, "請輸入作者:");
         String publisher = JOptionPane.showInputDialog(null, "請輸入出版社:");
-	    String page = JOptionPane.showInputDialog("請輸入頁數");
+	    String page = JOptionPane.showInputDialog(null,"請輸入頁數");
         Main.books.put(isbn, new Book(isbn, name, author, publisher, page, false, 0, 0, null));
         FileWriter filewriter = new FileWriter("books.txt", true);
         filewriter.write(isbn+" "+name+" "+author+" "+publisher+" "+page+"\r\n");
@@ -49,7 +49,6 @@ public class Admin extends User{
         }
         else{
             Main.books.remove(isbn);
-            
         }
     }
     //edit books
@@ -59,9 +58,26 @@ public class Admin extends User{
             JOptionPane.showMessageDialog(null, "查無此書!\n無法修改!");
         }
         else{
-            Main.books.remove(isbn);
+        	String name = JOptionPane.showInputDialog(null, "請輸入書名:");
+            String author = JOptionPane.showInputDialog(null, "請輸入作者:");
+            String publisher = JOptionPane.showInputDialog(null, "請輸入出版社:");
+    	    String page = JOptionPane.showInputDialog(null,"請輸入頁數");
+    	    if (name.equals("")) {
+    	    	name = Main.books.get(isbn).getName();
+    	    }
+    	    if (author.equals("")) {
+    	    	author = Main.books.get(isbn).getAuthor();
+    	    }
+    	    if (publisher.equals("")) {
+    	    	publisher = Main.books.get(isbn).getPublisher();
+    	    }
+    	    if (page.equals("")) {
+    	    	page = Main.books.get(isbn).getPage();
+    	    }
+    	    Main.books.put(isbn, new Book(isbn, name, author, publisher, page, false, 0, 0, null));
         }
     }
+    
     public String toString(){
         String s="你好，";
         s += getName();
