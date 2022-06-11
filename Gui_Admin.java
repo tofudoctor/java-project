@@ -874,7 +874,7 @@ public class Gui_Admin extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									login mainframe = new login();
+									Login mainframe = new Login();
 									mainframe.setVisible(true);
 									Main.save();
 									/*while(mainframe.control){

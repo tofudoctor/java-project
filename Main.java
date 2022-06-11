@@ -32,7 +32,6 @@ public class Main{
         scanner = new Scanner(doc2);
         while (scanner.hasNextLine()){
             String tmp = scanner.nextLine();
-            System.out.println(tmp);
             String tmps[] = tmp.split(" ");
             if(tmps[5].equals("false"))
                 books.put(tmps[0], new Book(tmps[0], tmps[1], tmps[2], tmps[3], tmps[4], false, Integer.parseInt(tmps[6]), Integer.parseInt(tmps[7]),tmps[8]));
@@ -140,7 +139,7 @@ public class Main{
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login mainframe = new login();
+					Login mainframe = new Login();
 					mainframe.setVisible(true);
                     save();
                     /*while(mainframe.control){

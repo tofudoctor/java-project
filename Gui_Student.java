@@ -673,7 +673,7 @@ public class Gui_Student extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									login mainframe = new login();
+									Login mainframe = new Login();
 									mainframe.setVisible(true);
 									Main.save();
 									/*while(mainframe.control){
@@ -705,6 +705,43 @@ public class Gui_Student extends JFrame {
 		sidebarlabellogout.setBounds(97, 0, 213, 53);
 		sidebarlogout.add(sidebarlabellogout);
 		
+
+		JPanel sidebarperson = new JPanel();
+		sidebarperson.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setcolor(sidebarperson);
+			}
+			public void mouseExited(MouseEvent e) {
+				resetcolor(sidebarperson);
+			}
+			public void mouseClicked(MouseEvent e) {
+				String s="姓名: ";
+				s+=Main.users.get(Main.loginemail).getName();
+				s+="\n帳號: ";
+				s+=Main.loginemail;
+				s+="\n密碼: ";
+				s+=Main.users.get(Main.loginemail).getPassword();
+				s+="\n身分: 學生\n目前已借閱";
+				s+=Main.users.get(Main.loginemail).getCount();
+				s+="本書";
+				JOptionPane.showMessageDialog(null, s);
+			}
+		});
+		sidebarperson.setLayout(null);
+		sidebarperson.setBackground(new Color(109, 70, 107));
+		sidebarperson.setBounds(0, 370, 300, 53);
+		sidebar.add(sidebarperson);
+		
+		JLabel sidebarpic8 = new JLabel(new ImageIcon("Images/register.png"));
+		sidebarpic8.setBounds(40, 10, 47, 43);
+		sidebarperson.add(sidebarpic8);
+		
+		JLabel sidebarlabelperson = new JLabel("個人資料");
+		sidebarlabelperson.setForeground(Color.WHITE);
+		sidebarlabelperson.setFont(new Font("微軟正黑體", Font.BOLD, 24));
+		sidebarlabelperson.setBounds(97, 0, 213, 53);
+		sidebarperson.add(sidebarlabelperson);
 		
 	}
 }

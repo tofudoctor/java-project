@@ -21,7 +21,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class login extends JFrame {
+public class Login extends JFrame {
 	//JFrame frame = new JFrame();
 	public JPanel contentPane;
 	public final JPanel loginpanel = new JPanel();
@@ -44,7 +44,7 @@ public class login extends JFrame {
 	void resetcolor(JPanel panel){
 		panel.setBackground(new Color(109, 70, 107));
 	}
-	public login() {
+	public Login() {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
     		public void windowClosing(WindowEvent event) {
